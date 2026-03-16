@@ -1,0 +1,242 @@
+:root {
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --primary: #58a6ff;
+    --danger: #f85149;
+    --success: #2ea043;
+    --text: #c9d1d9;
+    --border: #30363d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #58a6ff, #a371f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #8b949e;
+    font-size: 1.2rem;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.video-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#output_canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.status-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.monitoring {
+    background: rgba(46, 160, 67, 0.2);
+    color: var(--success);
+}
+
+.danger {
+    background: rgba(248, 81, 73, 0.2);
+    color: var(--danger);
+    animation: pulse 1s infinite alternate;
+}
+
+.idle {
+    background: rgba(139, 148, 158, 0.2);
+    color: #8b949e;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(248, 81, 73, 0);
+    }
+
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(248, 81, 73, 0.5);
+    }
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn.primary:not(:disabled):hover {
+    background: #3a8ded;
+    transform: translateY(-2px);
+}
+
+.btn.danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.btn.danger:not(:disabled):hover {
+    background: #d83a32;
+    transform: translateY(-2px);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.setting-group label {
+    font-weight: 600;
+}
+
+input[type=range] {
+    width: 100%;
+    accent-color: var(--primary);
+}
+
+.dropdown {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: #0d1117;
+    color: var(--text);
+    border: 1px solid var(--border);
+    font-size: 1rem;
+    outline: none;
+}
+
+.dropdown:focus {
+    border-color: var(--primary);
+}
+
+.diag-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.diag-row .value {
+    font-family: monospace;
+    font-size: 1.2rem;
+    background: #000;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    color: #58a6ff;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}

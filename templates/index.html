@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Drowsiness AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>StayAwake AI</h1>
+            <p>Advanced Deep Learning Drowsiness Detection</p>
+        </header>
+
+        <div class="main-content">
+            <div class="video-section">
+                <div class="video-container">
+                    <video id="webcam" autoplay playsinline style="display:none;"></video>
+                    <canvas id="output_canvas"></canvas>
+                    <div id="status-overlay" class="status-overlay idle">SYSTEM IDLE</div>
+                </div>
+
+                <div class="controls">
+                    <button id="start-btn" class="btn primary">Start Camera</button>
+                    <button id="stop-btn" class="btn danger" disabled>Stop Camera</button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h3>Detection Settings</h3>
+
+                    <div class="setting-group" style="margin-bottom: 20px;">
+                        <label>AI Strategy:</label>
+                        <select id="mode-select" class="dropdown">
+                            <option value="MediaPipe EAR (DL Mapping)">MediaPipe EAR (DL Mapping)</option>
+                            <option value="Haar Cascades (Classic)">Haar Cascades (Classic)</option>
+                            <option value="Custom Keras CNN (DL Image)" selected>Custom Keras CNN (DL Image)</option>
+                            <option value="HYBRID (Combine All)">HYBRID (Combine All)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group" style="margin-bottom: 20px;">
+                        <label>EAR Threshold: <span id="ear-val">0.25</span></label>
+                        <input type="range" id="ear-slider" min="0.10" max="0.40" step="0.01" value="0.25">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Alarm Delay (Frames): <span id="delay-val">10</span></label>
+                        <input type="range" id="delay-slider" min="5" max="50" value="10">
+                    </div>
+                </div>
+
+                <div class="card diagnostics">
+                    <h3>Live Cloud Diagnostics</h3>
+                    <div class="diag-row">
+                        <span>Status:</span>
+                        <span id="cnn-status" class="value">N/A</span>
+                    </div>
+                    <div class="diag-row">
+                        <span>EAR Value:</span>
+                        <span id="ear-value" class="value">0.00</span>
+                    </div>
+                    <div class="diag-row">
+                        <span>Drowsy Frames:</span>
+                        <span id="frame-count" class="value">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alarm Sound -->
+    <audio id="alarm-sound" src="/static/alarm.wav" preload="auto" loop></audio>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
